@@ -1,0 +1,32 @@
+.snackbar {
+    min-width: 250px;
+    margin-left: -125px;
+    color: #0e6251;
+    background-color: #d1f2eb;
+    border: 1px solid transparent;
+    border-color: #bfece3;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    font-size: 17px;
+    transition: visibility 0s linear 0.5s, opacity 0.5s linear, top 0.5s linear;
+    visibility: hidden;
+    top: 0;
+    opacity: 0;
+}
+
+.snackbar.danger {
+    color: #7d2c38;
+    background-color: #fcdde2;
+    border-color: #fcdde2;
+}
+
+.snackbar.show {
+    transition: visibility 0s linear, opacity 0.5s linear, top 0.5s linear;
+    visibility: visible;
+    top: 30px;
+    opacity: 1;
+}
