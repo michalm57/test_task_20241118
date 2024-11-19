@@ -1,5 +1,5 @@
 CREATE TABLE `zadanie` (
-  `id_form` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `surname` varchar(50) COLLATE utf8_polish_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_polish_ci NOT NULL,
@@ -12,6 +12,6 @@ CREATE TABLE `zadanie` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
-ALTER TABLE `zadanie` ADD PRIMARY KEY (`id_form`);
+ALTER TABLE `zadanie` ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `zadanie` MODIFY `id_form` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `zadanie` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
