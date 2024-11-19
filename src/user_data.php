@@ -10,10 +10,10 @@ $database = new Database();
 $db = $database->connect();
 $userRepo = new UserRepository($db);
 $params = $_GET;
-$data = $userRepo->fetchPaginatedData($params);
+$data = $userRepo->fetch_paginated_data($params);
 
 try {
-    $data = $userRepo->fetchPaginatedData($params);
+    $data = $userRepo->fetch_paginated_data($params);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data);
 } catch (\Exception $e) {

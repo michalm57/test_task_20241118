@@ -33,11 +33,14 @@ $(function() {
             contentType: false,
             success: function (data) {
                 if (data.status) {
-                    snackbar("#success_container")
-                        .setText('Dane zostały zapisane!')
-                        .showAndHide();
+                    snackbar("#success_container").setText('Dane zostały zapisane!').showAndHide();
+
+                    container.find('.email-domain-counter').text(data.data.surname_count);
+                    container.find('.surname-counter').text(data.data.domain_count);
     
-                    $('form').trigger("reset");
+                    setTimeout(function() {
+                        window.location.href = 'index.php';
+                    }, 1000);
                 }
             },
             error: function (xhr) {
