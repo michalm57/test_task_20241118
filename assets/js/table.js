@@ -23,13 +23,16 @@ $(function() {
         "columns": [
             { "data": "name" },
             { "data": "surname" },
-            { "data": "email" },
+            { "data": "email", "orderable": false },
             { "data": "phone", "orderable": false },
-            { "data": "choose","orderable": false },
-            { "data": "client_no","orderable": false },
-            { "data": "agreement1", "orderable": false },
-            { "data": "user_info", "orderable": false }
+            { "data": "client_no", "orderable": false },
+            { 
+                "data": "date", 
+                "render": function(data, type, row) {
+                    return moment.utc(data).local().format('YYYY-MM-DD HH:mm:ss');
+                }
+            }
         ],
-        "order": [[0, "asc"]]
+        "order": [[5, "desc"]]
     });
 });

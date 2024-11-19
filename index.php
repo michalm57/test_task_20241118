@@ -16,7 +16,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js"></script>
     <script src="assets/js/table.js"></script>
+    
 </head>
 
 <body>
@@ -39,10 +41,8 @@
                     <th>Nazwisko</th>
                     <th>Email</th>
                     <th>Telefon</th>
-                    <th>Wybór</th>
                     <th>Numer klienta</th>
-                    <th>Zgoda 1</th>
-                    <th>Informacje użytkownika</th>
+                    <th>Data dodania</th>
                 </tr>
             </thead>
         </table>
