@@ -26,6 +26,7 @@ $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/snackbar.css">
+    <link rel="stylesheet" href="assets/css/app.css">
 
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -36,7 +37,15 @@ $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
 </head>
 
 <body>
-    <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="index.php">Użytkownicy</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
         <div id="errors_container" class="snackbar danger"></div>
         <div id="success_container" class="snackbar"></div>
         <form action="src/user_form.php" method="POST">
