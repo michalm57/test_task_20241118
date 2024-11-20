@@ -5,13 +5,16 @@ $(function() {
     function onClickRadioChoose() {
         let chooseValue = $(this).val();
         let accountInput = $('.container').find('input[name="account"]');
+        let accountLabel = $('.container').find('label[for="account"]');
 
         if(chooseValue == 1) {
             accountInput.attr('required', true);
+            accountLabel.addClass('required');
         }
 
         if(chooseValue == 2) {
             accountInput.attr('required', false);
+            accountLabel.removeClass('required');
         }
     }
 

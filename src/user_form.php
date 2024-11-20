@@ -127,7 +127,8 @@ class UserForm
             'phone'     => htmlspecialchars(trim($data['phone'])),
             'choose'    => htmlspecialchars(trim($data['choose'])),
             'client_no' => htmlspecialchars(trim($data['client_no'])),
-            'agreement' => isset($data['agreement1']) ? 1 : 0,
+            'agreement1' => isset($data['agreement1']) ? 1 : 0,
+            'agreement2' => isset($data['agreement2']) ? 1 : 0,
             'userinfo'  => htmlspecialchars(trim($data['userinfo'] ?? '')),
         ];
     }

@@ -52,13 +52,13 @@ $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
                     </div>
                     <div class="col-md-6">
                         <div class="form-group pb-4">
-                            <label for="name">Imię</label>
+                            <label for="name" class="required">Imię</label>
                             <input type="text" id="name" name="name" maxlength="30" class="form-control" required />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group pb-4">
-                            <label for="surname">Nazwisko</label>
+                            <label for="surname" class="required">Nazwisko</label>
                             <input type="text" id="surname" name="surname" maxlength="40" class="form-control" required />
                         </div>
                     </div>
@@ -66,13 +66,13 @@ $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group pb-4">
-                            <label for="email">Adres e-mail</label>
+                            <label for="email" class="required">Adres e-mail</label>
                             <input type="email" id="email" name="email" maxlength="80" class="form-control" required />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group pb-4">
-                            <label for="phone_optional">Numer telefonu komórkowego</label>
+                            <label for="phone" class="required">Numer telefonu komórkowego</label>
                             <input type="text" id="phone" name="phone" maxlength="9" class="form-control" required />
                         </div>
                     </div>
@@ -80,13 +80,14 @@ $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group pb-4">
-                            <label for="code">Numer klienta</label>
+                            <label for="code" class="required">Numer klienta</label>
                             <input type="text" id="client_no" name="client_no" maxlength="12" class="form-control" required />
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <label for="choose" class="required">Wybór</label>
+                    <div class="col-md-6 pt-2">
                         <div class="form-group pb-4">
                             <label class="customcheck">
                                 <input type="radio" name="choose" value="1" required>
@@ -115,13 +116,13 @@ $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                        <label class="customcheck">
+                        <label class="customcheck required">
                             <input type="checkbox" id="agreement1" name="agreement1" required>
                             Oświadczenie 1
                         </label>
                     </div>
                     <div>
-                        <label class="customcheck">
+                        <label class="customcheck required">
                             <input type="checkbox" id="agreement2" name="agreement2" required>
                             Oświadczenie 2
                         </label>

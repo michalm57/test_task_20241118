@@ -3,3 +3,10 @@
     -webkit-box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
 }
+
+label.required::after {
+    content: "*";
+    color: red;
+    margin-left: 5px;
+    font-weight: bold;
+}
