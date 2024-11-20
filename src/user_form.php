@@ -16,20 +16,6 @@ class UserForm
         $this->user_repo = new UserRepository();
     }
 
-    private function sanitize_data($data)
-    {
-        return [
-            'name'      => htmlspecialchars(trim($data['name'])),
-            'surname'   => htmlspecialchars(trim($data['surname'])),
-            'email'     => htmlspecialchars(trim($data['email'])),
-            'phone'     => htmlspecialchars(trim($data['phone'])),
-            'choose'    => htmlspecialchars(trim($data['choose'])),
-            'client_no' => htmlspecialchars(trim($data['client_no'])),
-            'agreement' => isset($data['agreement1']) ? 1 : 0,
-            'userinfo'  => htmlspecialchars(trim($data['userinfo'] ?? '')),
-        ];
-    }
-
     public function save_form($post)
     {
         $validation = $this->is_form_valid($post);
@@ -130,6 +116,20 @@ class UserForm
             'data' => $data,
             'message' => $message
         ]);
+    }
+
+    private function sanitize_data($data)
+    {
+        return [
+            'name'      => htmlspecialchars(trim($data['name'])),
+            'surname'   => htmlspecialchars(trim($data['surname'])),
+            'email'     => htmlspecialchars(trim($data['email'])),
+            'phone'     => htmlspecialchars(trim($data['phone'])),
+            'choose'    => htmlspecialchars(trim($data['choose'])),
+            'client_no' => htmlspecialchars(trim($data['client_no'])),
+            'agreement' => isset($data['agreement1']) ? 1 : 0,
+            'userinfo'  => htmlspecialchars(trim($data['userinfo'] ?? '')),
+        ];
     }
 }
 
