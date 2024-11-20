@@ -62,8 +62,8 @@ class UserForm
             'phone'     => $data['phone'],
             'choose'    => $data['choose'],
             'client_no' => $data['client_no'],
-            'agreement1' => $data['agreement'],
-            'agreement2' => $data['agreement'],
+            'agreement1' => $data['agreement1'],
+            'agreement2' => $data['agreement2'],
             'userinfo'  => $data['userinfo'],
         ];
     }
@@ -71,10 +71,10 @@ class UserForm
     private function is_form_valid($data)
     {
         $errors = [];
-        $requiredFields = ['name', 'surname', 'email', 'phone', 'client_no', 'choose', 'agreement1', 'agreement2'];
+        $required_fields = ['name', 'surname', 'email', 'phone', 'client_no', 'choose', 'agreement1', 'agreement2'];
         $data['account'] = str_replace(' ', '', $data['account']);
 
-        foreach ($requiredFields as $field) {
+        foreach ($required_fields as $field) {
             if (empty($data[$field])) {
                 $errors[] = "Pole {$this->map_field_name($field)} jest wymagane.";
             }

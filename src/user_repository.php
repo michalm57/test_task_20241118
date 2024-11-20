@@ -30,51 +30,51 @@ class UserRepository
         $start = $params['start'] ?? 0;
         $length = $params['length'] ?? 10;
     
-        $orderColumnIndex = $params['order'][0]['column'] ?? 0;
-        $orderColumn = $columns[$orderColumnIndex] ?? 'id';
-        $orderDir = isset($params['order'][0]['dir']) && $params['order'][0]['dir'] === 'desc' ? 'DESC' : 'ASC';
+        $order_column_index = $params['order'][0]['column'] ?? 0;
+        $order_column = $columns[$order_column_index] ?? 'id';
+        $order_dir = isset($params['order'][0]['dir']) && $params['order'][0]['dir'] === 'desc' ? 'DESC' : 'ASC';
     
-        $searchValue = $params['search']['value'] ?? '';
+        $search_value = $params['search']['value'] ?? '';
     
         $query = "SELECT * FROM users";
-        $queryParams = [];
+        $query_params = [];
     
-        if (!empty($searchValue)) {
+        if (!empty($search_value)) {
             $query .= " WHERE name LIKE :search OR surname LIKE :search OR email LIKE :search";
-            $queryParams['search'] = '%' . $searchValue . '%';
+            $query_params['search'] = '%' . $search_value . '%';
         }
     
-        $query .= " ORDER BY $orderColumn $orderDir LIMIT :start, :length";
+        $query .= " ORDER BY $order_column $order_dir LIMIT :start, :length";
     
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(':start', (int)$start, PDO::PARAM_INT);
         $stmt->bindValue(':length', (int)$length, PDO::PARAM_INT);
     
-        foreach ($queryParams as $key => $value) {
+        foreach ($query_params as $key => $value) {
             $stmt->bindValue(":$key", $value);
         }
     
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        $totalQuery = "SELECT COUNT(*) FROM users";
-        $totalRecords = $this->db->query($totalQuery)->fetchColumn();
+        $total_query = "SELECT COUNT(*) FROM users";
+        $total_records = $this->db->query($total_query)->fetchColumn();
     
-        $filteredQuery = "SELECT COUNT(*) FROM users";
-        if (!empty($searchValue)) {
-            $filteredQuery .= " WHERE name LIKE :search OR surname LIKE :search OR email LIKE :search";
+        $filtered_query = "SELECT COUNT(*) FROM users";
+        if (!empty($search_value)) {
+            $filtered_query .= " WHERE name LIKE :search OR surname LIKE :search OR email LIKE :search";
         }
-        $filteredStmt = $this->db->prepare($filteredQuery);
-        if (!empty($searchValue)) {
-            $filteredStmt->bindValue(':search', '%' . $searchValue . '%', PDO::PARAM_STR);
+        $filtered_smt = $this->db->prepare($filtered_query);
+        if (!empty($search_value)) {
+            $filtered_smt->bindValue(':search', '%' . $search_value . '%', PDO::PARAM_STR);
         }
-        $filteredStmt->execute();
-        $filteredRecords = $filteredStmt->fetchColumn();
+        $filtered_smt->execute();
+        $filtered_records = $filtered_smt->fetchColumn();
     
         return [
             'draw' => $params['draw'] ?? 1,
-            'recordsTotal' => (int)$totalRecords,
-            'recordsFiltered' => (int)$filteredRecords,
+            'recordsTotal' => (int)$total_records,
+            'recordsFiltered' => (int)$filtered_records,
             'data' => $data,
         ];
     }   
