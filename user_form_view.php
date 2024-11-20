@@ -1,13 +1,9 @@
 <?php
 require_once 'src/user_repository.php';
-require_once 'src/database.php';
 
-use Src\Database;
 use Src\UserRepository;
 
-$database = new Database();
-$db = $database->connect();
-$user_repo = new UserRepository($db);
+$user_repo = new UserRepository();
 $surname_counter = $user_repo->fetch_surname_counter('Kowalski');
 $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
 ?>
@@ -20,7 +16,7 @@ $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
     <meta charset="utf-8" />
     <title>Dodaj użytkownika</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="zadanie" name="description" />
+    <meta content="users" name="description" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- CSS -->
@@ -33,7 +29,7 @@ $email_domain_counter = $user_repo->fetch_email_domain_counter('gmail.com');
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="assets/js/snackbar.js"></script>
-    <script src="assets/js/zadanie.js"></script>
+    <script src="assets/js/users.js"></script>
 </head>
 
 <body>

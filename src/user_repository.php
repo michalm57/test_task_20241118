@@ -13,8 +13,7 @@ class UserRepository
 
     public function __construct()
     {
-        $database = new Database();
-        $this->db = $database->connect();
+        $this->db = Database::get_connection();
     }
 
     public function fetch_paginated_data($params)
@@ -37,7 +36,7 @@ class UserRepository
     
         $searchValue = $params['search']['value'] ?? '';
     
-        $query = "SELECT * FROM zadanie";
+        $query = "SELECT * FROM users";
         $queryParams = [];
     
         if (!empty($searchValue)) {
@@ -58,10 +57,10 @@ class UserRepository
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        $totalQuery = "SELECT COUNT(*) FROM zadanie";
+        $totalQuery = "SELECT COUNT(*) FROM users";
         $totalRecords = $this->db->query($totalQuery)->fetchColumn();
     
-        $filteredQuery = "SELECT COUNT(*) FROM zadanie";
+        $filteredQuery = "SELECT COUNT(*) FROM users";
         if (!empty($searchValue)) {
             $filteredQuery .= " WHERE name LIKE :search OR surname LIKE :search OR email LIKE :search";
         }
@@ -78,12 +77,26 @@ class UserRepository
             'recordsFiltered' => (int)$filteredRecords,
             'data' => $data,
         ];
-    }    
+    }   
+
+    public function store_user($data)
+    {
+        try {
+            $query = "INSERT INTO users (name, surname, email, phone, choose, client_no, agreement1, agreement2, user_info) 
+                      VALUES (:name, :surname, :email, :phone, :choose, :client_no, :agreement1, :agreement2, :userinfo)";
+            $exec = $this->db->prepare($query);
+            $exec->execute($data);
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 
     public function fetch_surname_counter($surname)
     {
         try {
-            $stmt = $this->db->prepare("SELECT id_form FROM `zadanie` WHERE surname = :surname");
+            $stmt = $this->db->prepare("SELECT id FROM `users` WHERE surname = :surname");
             $stmt->execute(['surname' => $surname]);
 
             return $stmt->rowCount();
@@ -95,7 +108,7 @@ class UserRepository
     public function fetch_email_domain_counter($domain)
     {
         try {
-            $stmt = $this->db->prepare("SELECT id_form FROM `zadanie` WHERE email LIKE :domain");
+            $stmt = $this->db->prepare("SELECT id FROM `users` WHERE email LIKE :domain");
             $stmt->execute(['domain' => '%@' . $domain]);
 
             return $stmt->rowCount();

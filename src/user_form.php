@@ -2,23 +2,18 @@
 
 namespace Src;
 
-require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/user_repository.php';
 
-use Src\Database;
 use Src\UserRepository;
 use PDOException;
 
 class UserForm
 {
-    protected $db;
-    protected $userRepo;
+    protected $user_repo;
 
     public function __construct()
     {
-        $database = new Database();
-        $this->db = $database->connect();
-        $this->userRepo = new UserRepository($this->db);
+        $this->user_repo = new UserRepository();
     }
 
     private function sanitize_data($data)
@@ -43,12 +38,11 @@ class UserForm
         }
 
         $data = $this->sanitize_data($post);
-
         $data = $this->map_data($data);
 
-        if ($this->save_form_to_db($data)) {
-            $surname_count = $this->userRepo->fetch_surname_counter('Kowalski');
-            $domain_count = $this->userRepo->fetch_email_domain_counter('gmail.com');
+        if ($this->user_repo->store_user($data)) {
+            $surname_count = $this->user_repo->fetch_surname_counter('Kowalski');
+            $domain_count = $this->user_repo->fetch_email_domain_counter('gmail.com');
 
             return $this->json_response(200, [
                 'surname_count' => $surname_count,
@@ -56,20 +50,6 @@ class UserForm
             ], 'Data saved!');
         } else {
             return $this->json_response(200, [], 'Error!');
-        }
-    }
-
-    private function save_form_to_db($data)
-    {
-        try {
-            $query = "INSERT INTO zadanie (name, surname, email, phone, choose, client_no, agreement1, agreement2, user_info) 
-                      VALUES (:name, :surname, :email, :phone, :choose, :client_no, :agreement1, :agreement2, :userinfo)";
-            $exec = $this->db->prepare($query);
-            $exec->execute($data);
-
-            return true;
-        } catch (PDOException $e) {
-            return false;
         }
     }
 
